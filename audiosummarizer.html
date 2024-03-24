@@ -2,92 +2,134 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AudioSangraha</title>
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="stylesheet.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rajdhani">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AudioSangraha</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rajdhani">
 </head>
 
 <body class="home-page">
 
-  <!-- Preloader -->
-  <div class="preloader d-flex align-items-center justify-content-center">
-    <div class="lds-ellipsis">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  </div>
-
-  <!-- ##### Header Area Start ##### -->
-  <header class="header-area">
-    <!-- Navbar Area -->
-    <div class="container">
-      <!-- Menu -->
-      <nav class="navbar navbar-expand-lg navbar-light ">
-        <a class="navbar-brand" href="#">
-          <img src="img/AUDSangraha.png" alt="Logo" height="30">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav mx-auto ">
-            <li class="nav-item active">
-              <a class="nav-link nav-active" style="color: #3B91C0;" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="textsummarizer.html">Text Summarizer</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="audiosummarizer.html">Audio Summarizer</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Help</a>
-            </li>
-          </ul>
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link login" href="#">Login</a>
-            </li>
-          </ul>
+    <!-- Preloader -->
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
-      </nav>
     </div>
-  </header>
+
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+        <!-- Navbar Area -->
+        <!-- Menu -->
+        <nav class="navbar navbar-expand-lg navbar-light  w-100 px-4 shadow-sm  ">
+            <a class="navbar-brand mx-lg-5" href="#">
+                <img src="img/AUDSangraha.png" alt="Logo" height="30">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto ">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="textsummarizer.html">Text Summarizer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-active" href="audiosummarizer.html" style="color: #3B91C0;"><span
+                                class="sr-only">(current)</span>Audio Summarizer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Help</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link login mx-lg-5" href="#">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section>
+        <!-- input box and output box -->
+        <div class="p-md-4 p-2 border-0 h-100 mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-5">
+                    <h5 class="fw-bold mb-3">Upload or Record Audio</h5>
+                    <div class="input-group">
+                        <!-- Microphone icon for recording audio -->
+                        <button class="btn btn-primary" id="recordAudioBtn">
+                            <i class="fa fa-microphone me-2" aria-hidden="true"></i> Record Audio
+                        </button>
+                        <!-- File input for uploading audio files -->
+                        <input type="file" id="audioFileInput" accept="audio/*" class="form-control d-none">
+                        <label for="audioFileInput" class="btn btn-primary ms-2">
+                            <i class="fa fa-upload me-2" aria-hidden="true"></i> Upload Audio
+                        </label>
+                        <button class="btn btn-primary ms-2 w-100 mt-2 mb-5" id="genSum"
+                            style="width: calc(100% - 165px);">
+                            Generate summary
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <h5 class="fw-bold mb-3">Generated summary</h5>
+                    <textarea readonly name="" id="generatedSummary" cols="30" rows="15" placeholder=""
+                        class="w-100 border border-1 px-3 py-2"></textarea>
+                    <div class="d-flex justify-content-between">
+                        <button class="btn btn-danger border clear-txt-btn">
+                            <i class="fa fa-close me-2" aria-hidden="true"></i> Clear
+                        </button>
+                        <button class="btn btn-success border border-2 copy-txt-btn">
+                            <i class="fa fa-copy me-2" aria-hidden="true"></i> Copy
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
-<footer class="bg-body-tertiary text-center text-lg-start">
-  <!-- Copyright -->
-  <div class="footer-cls text-center p-3">
-    © AudioSangraha | Developed by : <a class="footer-link"> Aqeel Shafy</a>
-  </div>
-  <!-- Copyright -->
-</footer>
 
 
-  <!-- jQuery and Bootstrap JS -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script>
+    <footer class="bg-body-tertiary text-center text-lg-start">
+        <!-- Copyright -->
+        <div class="footer-cls text-center p-3">
+            © AudioSangraha | Developed by: <a class="footer-link"> Aqeel Shafy</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
 
 
-    var browserWindow = $(window);
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
 
-    // :: 1.0 Preloader Active Code
-    browserWindow.on('load', function () {
-      $('.preloader').fadeOut('slow', function () {
-        $(this).remove();
-      });
-    });
-  </script>
+
+        var browserWindow = $(window);
+
+        // :: 1.0 Preloader Active Code
+        browserWindow.on('load', function () {
+            $('.preloader').fadeOut('slow', function () {
+                $(this).remove();
+            });
+        });
+    </script>
+
 </body>
 
 </html>

@@ -130,7 +130,7 @@
     background-color: #3B91C0;
     border-radius: 5px;
     padding: 10px 25px;
-    font-weight:normal;
+    font-weight: normal;
     border: 1px solid transparent;
   }
 
@@ -139,22 +139,23 @@
     border: 1px solid #000000;
     transition: none;
   }
-  
 
-  footer{
-  
+
+  footer {
+
     bottom: 0;
     width: 100%;
     background-color: rgb(27, 27, 27);
     color: #9c9c9c;
     font-family: "poppins";
     font-size: 12px;
-}
-.footer-link{
-  color: #9c9c9c;
-}
- 
-  
+  }
+
+  .footer-link {
+    color: #9c9c9c;
+  }
+
+
   .bg-img {
     position: absolute;
     width: 100%;
@@ -170,12 +171,14 @@
     background-repeat: no-repeat;
   }
 
-.services{
-  margin-top: 7%;
-}
-.card{
-  border: 2px solid #3B91C0;
-}
+  .services {
+    margin-top: 7%;
+  }
+
+  .card {
+    border: 2px solid #3B91C0;
+  }
+
   .hero-slides-content {
     margin-top: 12%;
     display: inline-block;
@@ -189,20 +192,21 @@
     font-family: 'Poppins';
   }
 
-  
-/* :: 5.0 Hero Slides Area */
-.hero-area,
-.hero-slides {
-  position: relative;
-  z-index: 1; }
 
-.single-hero-slide {
-  width: 100%;
-  height: 700px;
-  z-index: 1;
-  position: relative;
+  /* :: 5.0 Hero Slides Area */
+  .hero-area,
+  .hero-slides {
+    position: relative;
+    z-index: 1;
+  }
 
- }
+  .single-hero-slide {
+    width: 100%;
+    height: 700px;
+    z-index: 1;
+    position: relative;
+
+  }
 
   .hero-slides-content h5 {
     font-size: 22px;
@@ -210,11 +214,12 @@
     font-weight: normal;
     font-family: 'Rajdhani';
   }
-  .navbar-nav li{
+
+  .navbar-nav li {
     font-family: 'Poppins';
-    font-weight:600;
+    font-weight: 600;
   }
-  
+
 
 
 
@@ -222,7 +227,8 @@
     .hero-slides-content {
       margin-top: 30%;
     }
-    .services{
+
+    .services {
       margin-top: 20%;
     }
 
@@ -247,53 +253,59 @@
     border: 1px solid #000000;
     text-decoration: none;
   }
-#genSum{
-  background-color: #3B91C0;
-  border: none;
-  font-family: "poppins";
-}
 
-#genSum:hover{
-  border: 1px solid #000000;
-  color: #000000;
-}
+  #genSum {
+    background-color: #3B91C0;
+    border: none;
+    font-family: "poppins";
+  }
 
-.btn-danger{
-  font-family: "poppins";
-}
+  #genSum:hover {
+    border: 1px solid #000000;
+    color: #000000;
+  }
 
-.btn-success, .fw-bold, .section-heading{
-  font-family: "poppins";
-}
+  .btn-danger {
+    font-family: "poppins";
+  }
 
-.card-title{
-  font-family: "poppins";
-  color: #000000;
-  font-weight: 600;
-}
+  .btn-success,
+  .fw-bold,
+  .section-heading {
+    font-family: "poppins";
+  }
 
-.card {
-  margin: 20px;
-  transition: transform 0.3s ease;
-}
+  .card-title {
+    font-family: "poppins";
+    color: #000000;
+    font-weight: 600;
+  }
 
-.card:hover {
-  transform: scale(1.05);
-  border: 2px solid #000000;
-}
-.card a {
-  text-decoration: none;
-}
+  .card {
+    margin: 20px;
+    transition: transform 0.3s ease;
+  }
 
-.card-text{
-  font-family: "rajdhani";
-  color: #555555;
-}
-.section-heading h5{
-  font-family: "rajdhani";
-}
+  .card:hover {
+    transform: scale(1.05);
+    border: 2px solid #000000;
+  }
 
-.btn-danger:hover, .btn-success:hover{
-  border: 1px solid #000000;
-  color: #000000;
-}
+  .card a {
+    text-decoration: none;
+  }
+
+  .card-text {
+    font-family: "rajdhani";
+    color: #555555;
+  }
+
+  .section-heading h5 {
+    font-family: "rajdhani";
+  }
+
+  .btn-danger:hover,
+  .btn-success:hover {
+    border: 1px solid #000000;
+    color: #000000;
+  }
