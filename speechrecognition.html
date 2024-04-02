@@ -69,33 +69,29 @@
         <div class="p-md-4 p-2 border-0 h-100 mt-5">
             <div class="row justify-content-center">
                 <div class="col-md-5">
-                    <h5 class="fw-bold mb-3">Upload or Record Audio</h5>
+                    <h5 class="fw-bold mb-3">Upload Audio Files</h5>
                     <div class="input-group">
-                        <!-- Microphone icon for recording audio -->
-                        <button class="btn btn-primary" id="recordAudioBtn">
-                            <i class="fa fa-microphone me-2" aria-hidden="true"></i> Record Audio
-                        </button>
-                        <!-- File input for uploading audio files -->
-                        <input type="file" id="audioFileInput" accept="audio/*" class="form-control d-none">
-                        <label for="audioFileInput" class="btn btn-primary ms-2">
-                            <i class="fa fa-upload me-2" aria-hidden="true"></i> Upload Audio
-                        </label>
-                        <button class="btn btn-primary ms-2 w-100 mt-2 mb-5" id="genSum"
-                            style="width: calc(100% - 165px);">
-                            Generate summary
+                        <div class="border-box w-100 border border-1 px-3 py-2 d-flex justify-content-center align-items-center" style="height: 405px;">
+                            <!-- File input for uploading audio files -->
+                            <input type="file" id="audioFiles" multiple style="width: 80%; margin: 0 auto;">
+                        </div>
+                        <!-- "Generate Text" button outside the border-box -->
+                        <button class="btn btn-primary w-100 mt-2" id="genSum" onclick="uploadFiles()">
+                            Generate Text
                         </button>
                     </div>
                 </div>
-
+                
+    
                 <div class="col-md-5">
                     <h5 class="fw-bold mb-3">Generated summary</h5>
-                    <textarea readonly name="" id="generatedSummary" cols="30" rows="15" placeholder=""
-                        class="w-100 border border-1 px-3 py-2"></textarea>
+                    <textarea readonly name="" id="transcriptionResult" cols="30" rows="15" placeholder=""
+                        class="w-100 border border-1 px-3 py-2" style="height: 405px;"></textarea>
                     <div class="d-flex justify-content-between">
-                        <button class="btn btn-danger border clear-txt-btn">
+                        <button class="btn btn-danger border clear-txt-btn" onclick="resetTextarea()">
                             <i class="fa fa-close me-2" aria-hidden="true"></i> Clear
                         </button>
-                        <button class="btn btn-success border border-2 copy-txt-btn">
+                        <button class="btn btn-success border border-2 copy-txt-btn" onclick="copyTextarea()">
                             <i class="fa fa-copy me-2" aria-hidden="true"></i> Copy
                         </button>
                     </div>
@@ -103,6 +99,9 @@
             </div>
         </div>
     </section>
+    
+
+    
 
 
 
@@ -131,6 +130,39 @@
                 $(this).remove();
             });
         });
+
+        function uploadFiles() {
+            const files = document.getElementById('audioFiles').files;
+            const formData = new FormData();
+            
+            for (let i = 0; i < files.length; i++) {
+                formData.append('audio', files[i]);
+            }
+            
+            fetch('http://127.0.0.1:5000/audioSum', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                // Display the transcription in the text area
+                document.getElementById('transcriptionResult').value = data.message;
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function resetTextarea() {
+            document.getElementById("transcriptionResult").value = ""; // Set the value of the textarea to an empty string
+        }
+
+        function copyTextarea() {
+            var textarea = document.getElementById("transcriptionResult");
+            textarea.select(); // Select the text inside the textarea
+            document.execCommand("copy"); // Copy the selected text to the clipboard
+            alert("Text copied to clipboard!"); // Notify the user
+        }
+
     </script>
 
 </body>
