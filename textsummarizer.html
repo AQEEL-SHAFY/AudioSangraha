@@ -73,9 +73,9 @@
                 <div class="col-md-5">
                     <h5 class="fw-bold mb-3">Enter document to summarize</h5>
                     <div class="input-group">
-                        <textarea name="" id="userInput" cols="30" rows="15" placeholder="Enter your document here..."
+                        <textarea name="" id="inputTextArea" cols="30" rows="15" placeholder="Enter your document here..."
                             class="w-100 border border-1 px-3 py-2"></textarea>
-                        <button class="btn btn-primary ms-2 w-100 mt-2 mb-5" id="genSum"
+                        <button class="btn btn-primary ms-2 w-100 mt-2 mb-5" id="summarizeButton" onclick="summarizeButton()"
                             style="width: calc(100% - 85px);">
                             Generate summary
                         </button>
@@ -85,7 +85,7 @@
 
                 <div class="col-md-5">
                     <h5 class="fw-bold mb-3">Generated summary</h5>
-                    <textarea readonly name="" id="generatedSummary" cols="30" rows="15" placeholder=""
+                    <textarea readonly name="" id="summaryDiv" cols="30" rows="15" placeholder=""
                         class="w-100 border border-1 px-3 py-2"></textarea>
                     <div class="d-flex justify-content-between">
                         <button class="btn btn-danger border clear-txt-btn">
@@ -126,6 +126,36 @@
                 $(this).remove();
             });
         });
+
+
+        // Assuming jQuery is included
+
+        // Function to send text data to the backend for summarization
+        function summarizeText() {
+            // Get the input text from the textarea
+            var inputText = $('#inputTextArea').val();
+
+            // Send an AJAX POST request to the backend
+            $.ajax({
+                url: 'http://127.0.0.1:5000/textSum',
+                type: 'POST',
+                data: {inputText: inputText},
+                success: function(response) {
+                    // Handle the response from the backend
+                    $('#summaryDiv').text(response);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+        }
+
+        // Event listener for when the user clicks the summarize button
+        $('#summarizeButton').click(function() {
+            // Call the summarizeText function
+            summarizeText();
+        });
+
     </script>
 
 </body>

@@ -309,3 +309,52 @@
     border: 1px solid #000000;
     color: #000000;
   }
+
+
+  .loader-container {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
+      z-index: 9999; /* Ensure the loader appears on top */
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      display: none;
+    
+  }
+
+  .loader {
+      width: 48px;
+      height: 48px;
+      border: 5px solid #FFF;
+      border-bottom-color: #4a3dbb;
+      border-radius: 50%;
+      display: inline-block;
+      box-sizing: border-box;
+      animation: rotation 1s linear infinite;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+  }
+
+  @keyframes rotation {
+      0% {
+          transform: rotate(0deg);
+      }
+      100% {
+          transform: rotate(360deg);
+      }
+  }
+
+  .loader-text {
+    color: #000000;
+    justify-content: center;
+    position: absolute;
+    font-size: 16px;
+    bottom: 40%; /* Align the text to the bottom */
+    left: 50%;
+}
+
+

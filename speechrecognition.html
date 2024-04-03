@@ -64,6 +64,13 @@
         </nav>
     </header>
 
+    <div class="loader-container">
+        <div class="loader"></div>
+        <div class="loader-text">Loading...</div>
+    </div>
+
+
+
     <section>
         <!-- input box and output box -->
         <div class="p-md-4 p-2 border-0 h-100 mt-5">
@@ -130,26 +137,37 @@
                 $(this).remove();
             });
         });
+        
 
         function uploadFiles() {
-            const files = document.getElementById('audioFiles').files;
-            const formData = new FormData();
-            
-            for (let i = 0; i < files.length; i++) {
-                formData.append('audio', files[i]);
-            }
-            
-            fetch('http://127.0.0.1:5000/audioSum', {
-                method: 'POST',
-                body: formData,
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                // Display the transcription in the text area
-                document.getElementById('transcriptionResult').value = data.message;
-            })
-            .catch(error => console.error('Error:', error));
+        // Show loader
+        $('.loader-container').css('display', 'block');
+
+        const files = document.getElementById('audioFiles').files;
+        const formData = new FormData();
+
+        for (let i = 0; i < files.length; i++) {
+            formData.append('audio', files[i]);
+        }
+
+        fetch('http://127.0.0.1:5000/audioSum', {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Hide loader
+            $('.loader-container').css('display', 'none');
+
+            console.log(data);
+            // Display the transcription in the text area
+            document.getElementById('transcriptionResult').value = data.message;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            // Hide loader in case of error
+            $('.loader-container').css('display', 'none');
+        });
         }
 
         function resetTextarea() {
@@ -162,6 +180,16 @@
             document.execCommand("copy"); // Copy the selected text to the clipboard
             alert("Text copied to clipboard!"); // Notify the user
         }
+        // window.addEventListener("load", () => {
+        //     const loader = document.querySelector(".loader");
+
+        //     loader.classList.add("loader--hidden");
+
+        //     loader.addEventListener("transitionend", () => {
+        //         document.body.removeChild(loader);
+        //     });
+        // });
+        
 
     </script>
 
