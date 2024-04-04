@@ -254,7 +254,7 @@
     text-decoration: none;
   }
 
-  #genSum {
+  #genSum, #summarizeButton{
     background-color: #3B91C0;
     border: none;
     font-family: "poppins";
