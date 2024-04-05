@@ -175,10 +175,7 @@
     margin-top: 7%;
   }
 
-  .card {
-    border: 2px solid #3B91C0;
-  }
-
+  
   .hero-slides-content {
     margin-top: 12%;
     display: inline-block;
@@ -254,7 +251,7 @@
     text-decoration: none;
   }
 
-  #genSum {
+  #genSum, #summarizeButton{
     background-color: #3B91C0;
     border: none;
     font-family: "poppins";
@@ -284,6 +281,7 @@
   .card {
     margin: 20px;
     transition: transform 0.3s ease;
+    border: 2px solid #3B91C0;
   }
 
   .card:hover {

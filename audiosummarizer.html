@@ -63,7 +63,11 @@
             </div>
         </nav>
     </header>
-
+    
+    <div class="loader-container">
+        <div class="loader"></div>
+        <div class="loader-text">Loading...</div>
+    </div>
 
 
 
@@ -140,7 +144,7 @@
 
         function uploadFiles() {
         // Show loader
-        document.querySelector('.loader').style.display = 'block';
+        $('.loader-container').css('display', 'block');
 
         const files = document.getElementById('audioFiles').files;
         const formData = new FormData();
@@ -156,7 +160,7 @@
         .then(response => response.json())
         .then(data => {
             // Hide loader
-            document.querySelector('.loader').style.display = 'none';
+            $('.loader-container').css('display', 'none');
 
             console.log(data);
             // Display the transcription in the text area
@@ -165,9 +169,10 @@
         .catch(error => {
             console.error('Error:', error);
             // Hide loader in case of error
-            document.querySelector('.loader').style.display = 'none';
+            $('.loader-container').css('display', 'none');
         });
         }
+
 
         function resetTextarea() {
             document.getElementById("transcriptionResult").value = ""; // Set the value of the textarea to an empty string
