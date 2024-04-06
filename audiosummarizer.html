@@ -63,7 +63,7 @@
             </div>
         </nav>
     </header>
-    
+
     <div class="loader-container">
         <div class="loader"></div>
         <div class="loader-text">Loading...</div>
@@ -78,9 +78,21 @@
                 <div class="col-md-5">
                     <h5 class="fw-bold mb-3">Upload Audio Files</h5>
                     <div class="input-group">
-                        <div class="border-box w-100 border border-1 px-3 py-2 d-flex justify-content-center align-items-center" style="height: 405px;">
+                        <div class="border-box w-100 border border-1 px-3 py-2 d-flex justify-content-center align-items-center"
+                            style="height: 405px;">
                             <!-- File input for uploading audio files -->
-                            <input type="file" id="audioFiles" multiple style="width: 80%; margin: 0 auto;">
+                            <div class="upload">
+                                <div class="drop_box">
+                                    <header>
+                                        <h4>Select File here</h4>
+                                    </header>
+                                    <p>Audio Files Supported: mp3, wav, flac, ogg, mpeg </p>
+
+                                    <input type="file" id="audioFiles" multiple style="width: 50%; margin: 0 auto;">
+
+                                </div>
+
+                            </div>
                         </div>
                         <!-- "Generate Text" button outside the border-box -->
                         <button class="btn btn-primary w-100 mt-2" id="genSum" onclick="uploadFiles()">
@@ -88,8 +100,8 @@
                         </button>
                     </div>
                 </div>
-                
-    
+
+
                 <div class="col-md-5">
                     <h5 class="fw-bold mb-3">Generated summary</h5>
                     <textarea readonly name="" id="transcriptionResult" cols="30" rows="15" placeholder=""
@@ -101,7 +113,8 @@
                         <button class="btn btn-success border border-2 copy-txt-btn" onclick="copyTextarea()">
                             <i class="fa fa-copy me-2" aria-hidden="true"></i> Copy
                         </button>
-                        <button class="btn btn-success border border-2 copy-txt-btn" id="summarizeButton" onclick="summarizeButton()">
+                        <button class="btn btn-success border border-2 copy-txt-btn" id="summarizeButton"
+                            onclick="summarizeButton()">
                             <i class="fa fa-copy me-2" aria-hidden="true"></i> Generate Summary
                         </button>
                     </div>
@@ -109,9 +122,9 @@
             </div>
         </div>
     </section>
-    
 
-    
+
+
 
 
 
@@ -140,37 +153,54 @@
                 $(this).remove();
             });
         });
-        
+
 
         function uploadFiles() {
-        // Show loader
-        $('.loader-container').css('display', 'block');
+            // Show loader
+            $('.loader-container').css('display', 'block');
 
-        const files = document.getElementById('audioFiles').files;
-        const formData = new FormData();
+            const files = document.getElementById('audioFiles').files;
 
-        for (let i = 0; i < files.length; i++) {
-            formData.append('audio', files[i]);
-        }
+            // Check if at least two files are selected
+            if (files.length < 2) {
+                alert('Please upload at least two audio files.');
+                // Hide loader
+                $('.loader-container').css('display', 'none');
+                return; // Stop further execution
+            }
 
-        fetch('http://127.0.0.1:5000/audioSum', {
-            method: 'POST',
-            body: formData,
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Hide loader
-            $('.loader-container').css('display', 'none');
+            // Check if number of files exceeds 30
+            if (files.length > 30) {
+                alert('You can upload maximum 30 audio files.');
+                // Hide loader
+                $('.loader-container').css('display', 'none');
+                return; // Stop further execution
+            }
 
-            console.log(data);
-            // Display the transcription in the text area
-            document.getElementById('transcriptionResult').value = data.message;
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            // Hide loader in case of error
-            $('.loader-container').css('display', 'none');
-        });
+            const formData = new FormData();
+
+            for (let i = 0; i < files.length; i++) {
+                formData.append('audio', files[i]);
+            }
+
+            fetch('http://127.0.0.1:5000/audioSum', {
+                method: 'POST',
+                body: formData,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Hide loader
+                    $('.loader-container').css('display', 'none');
+
+                    console.log(data);
+                    // Display the transcription in the text area
+                    document.getElementById('transcriptionResult').value = data.message;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    // Hide loader in case of error
+                    $('.loader-container').css('display', 'none');
+                });
         }
 
 
@@ -200,21 +230,22 @@
             $.ajax({
                 url: 'http://127.0.0.1:5000/textSum',
                 type: 'POST',
-                data: {inputText: inputText},
-                success: function(response) {
+                data: { inputText: inputText },
+                success: function (response) {
                     // Handle the response from the backend
                     $('#transcriptionResult').val(response);
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     console.error('Error:', error);
                 }
             });
         }
 
         // Event listener for when the user clicks the summarize button
-        $('#summarizeButton').click(function() {
+        $('#summarizeButton').click(function () {
             // Call the summarizeText function
             summarizeText();
+            $(this).prop('disabled', true);
         });
 
     </script>
